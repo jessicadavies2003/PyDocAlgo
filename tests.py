@@ -78,7 +78,7 @@ functionInfo = [
     ["numpy.concat", "Joins, or concatenates, a sequence of arrays along the given axis."],
     ["scipy.stats.shapiro", "Perform the Shapiro-Wilk test for normality."]
 ]
-PyDocAlgoTests.batchAddFunctTest(funcInformation)
+PyDocAlgoTests.batchAddFunctTest(functionInfo)
 ```
 """
 
@@ -87,6 +87,7 @@ PyDocAlgoTests.batchAddFunctTest(funcInformation)
             print(f"[SYSTEM] Function {row[0]} with description {row[1]} added.")
             time.sleep(2)
 
+# add your parameters here #
 findFuncTests = {
     1: ["Find me a function that selects a random element from a list.", 'y'],
     2: ["Get me a function that does a shapiro-wilks test to test for normality.", 'n'],
@@ -95,8 +96,34 @@ findFuncTests = {
 }
 
 addFuncTests = {
-    1: ["", ""],
-    2: ["", ""]
+    1: ['numpy.concat', 'Joins, or concatenates, a sequence of arrays along the given axis.'],
+    2: ['scipy.stats.shapiro', 'Perform the Shapiro-Wilk test for normality.'],
+    3: ['random.shuffle', 'Shuffle a python list in place, and returns None.'],
+    4: ['random.choice', 'Choose a random element from a non-empty sequence.'],
+    5: ['numpy.array', 'Creates and returns a 1-dimensional (1D) array of type `ndarray`.'],
+    6: ['numpy.reshape', 'Returns a reshaped array of type `ndarray` without changing data.'],
+    7: ['numpy.ndarray', 'Creates and returns an n-dimensional (nD) array of type `ndarray`. In other words, an array of any size.'],
+    8: ['numpy.vstack', 'Stack arrays in sequence vertically (row wise).'],
+    9: ['numpy.hstack', 'Stack arrays in sequence horizontally (column wise).'],
+    10: ['math.isnan', 'Return True if a given number is a NaN (not a number), and False otherwise.'],
+    11: ['pandas.read_csv', 'Read a CSV file into a DataFrame object.'],
+    12: ['numpy.arange', 'Creates and returns an array, of type `ndarray`, filled with values between given parameters `start` and `stop`.'],
+    13: ['numpy.zeros', 'Return a new array of given shape and type, filled with zeros.'],
+    14: ['numpy.ones', 'Return a new array of given shape and type, filled with ones.'],
+    15: ['numpy.concatenate', 'Joins, or concatenates, a sequence of arrays along the given axis.'],
+    16: ['numpy.ndarray.mean', 'Returns the average of the array elements along the given axis.'],
+    17: ['numpy.ndarray.max', 'Return the largest weight in the dataset'],
+    18: ['numpy.ndarray.argmax', 'Return the index of the largest weight in the dataset'],
+    19: ['pandas.Series.describe', 'Generate descriptive, describes the, statistics about the given Series object. Descriptive statistics include those that summarize the central tendency, dispersion and shape of a dataset’s distribution, excluding NaN values.'],
+    20: ['pandas.DataFrame.set_index', 'Set the DataFrame index (row labels) using one or more existing columns or arrays (of the correct length). The index can replace the existing index or expand on it.'],
+    21: ['scipy.stats.wilcoxon', 'Calculate the Wilcoxon signed-rank test.'],
+    22: ['scipy.stats.ttest_1samp', 'Calculate the T-test for the mean of ONE group of scores.'],
+    23: ['scipy.stats.ttest_rel', 'Calculate the t-test on two related samples of scores.'],
+    24: ['scipy.stats.mannwhitneyu', 'Perform the Mann-Whitney U rank test on two independent samples.'],
+    25: ['scipy.stats.pearsonr', 'Pearson correlation coefficient and p-value for testing non-correlation.'],
+    26: ['scipy.stats.f_oneway', 'Perform one-way ANOVA. This will test the null hypothesis that two or more groups have the same population mean.'],
+    27: ['scipy.stats.linregress', 'Calculate a linear least-squares regression, or a linear regression model, for two sets of measurements.'],
+    28: ['pandas.DataFrame.head', 'Returns the first n rows of a dataframe object, where n is an integer']
 }
 
 def performFindFuncTests(seconds: int = 5):
@@ -143,7 +170,7 @@ def performAddFuncTests(seconds: int = 5):
         time.sleep(seconds)
 
         PyDocAlgoTests.addFunctTest(funcName, desc)
-        print("Note: be sure to check `functions.csv` before continuing. Press CTRL + C if any errors occur.")
+        print("Note: be sure to check `functions.csv` before continuing. Press CTRL + C if any errors occur to stop the program.")
         input("Press <ENTER> to continue...")
 
 userInput = input("Which tests would you like to execute? [Find/Add]: ")
@@ -152,7 +179,7 @@ seconds = int(input("How many seconds between tests? (int): "))
 if userInput.lower() == 'find':
     performFindFuncTests(seconds)
 elif userInput.lower() == 'add':
-    performFindFuncTests(seconds)
+    performAddFuncTests(seconds)
 
 print("All tests complete. Exiting...")
 quit()

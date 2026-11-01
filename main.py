@@ -2,12 +2,16 @@ from csv import reader, writer
 # import nltk
 # nltk.download('stopwords')
 # nltk.download('punkt_tab')
+# nltk.download('wordnet')
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords, wordnet
 from nltk.stem import PorterStemmer
 import time
 from random import choice
 
+# py main.py
+
+exitKeyword = "exit"
 ps = PorterStemmer()
 stop_words = stopwords.words("english")
 
@@ -119,20 +123,39 @@ headers = funcsFile[0]
 
 def addFunctionProcess(funcName: str = None, desc: str = None):
     if (not funcName) and (not desc):
-        sendBotMessage("Enter the name of your function. (including the module it comes from. Example: numpy.ndarray).")
+        sendBotMessage("Enter the name of your function. (including the module it comes from. Example: numpy.ndarray), or type 'back' to go to the main menu.")
         funcName = input("[YOU] ")
+        if (funcName == 'back'):
+            sendBotMessage("Sent back to main menu!")
+            return
+        
         module = funcName.split(".")[0]
-        sendBotMessage("Enter a short description for this function. Example: 'Creates and returns an n-dimensional (nD) array of type `ndarray`. In other words, an array of any size.'")
+        sendBotMessage("Enter a short description for this function. Example: 'Creates and returns an n-dimensional (nD) array of type `ndarray`. In other words, an array of any size.', or type 'back' to go to the main menu")
         desc = input("[YOU] ")
-    
-    sendBotMessage(f"Adding function {funcName} to database...")
-    functionsFile = [row for row in reader(open("data/functions.csv")) if len(row) > 0]
-    functionsFile.append([module, funcName, desc])
 
-    moduleWriter = writer(open("data/functions.csv", "w"))
-    moduleWriter.writerows(functionsFile)
+        if (desc == 'back'):
+            sendBotMessage("Sent back to main menu!")
+            return
+
+    module = funcName.split(".")[0]
+    funcsFile = [row for row in reader(open("data/functions.csv")) if len(row) > 0][1:]
+    code = f"""import inspect
+import {module}
+x = inspect.signature({funcName})
+f = writer(open("data/functions-test.csv", "w"))
+
+row = ['{module}', '{funcName}', "{desc}", x]
+data = [{headers}]
+data.extend({funcsFile})
+data.append(row)
+
+f.writerows(data)
+"""
+    codeType = compile(code, "<string>", "exec")
+    eval(codeType)
 
     sendBotMessage("Success!")
+    return
 
 # processes #
 def makeComparisons(i: InputHandler, moduleToSearch: str = None, selectMultiple: bool = False):
@@ -159,6 +182,7 @@ def displayFunctionData(function: list[str]):
     print("="*30)
     print(f"Function Name: {function[1]}")
     print(f"Which Module Holds this Function?: {function[0]}")
+    print(f"Function Parameters: {function[3]}")
     print(f"Function Description: {function[2]}")
     print("="*30)
 
@@ -166,12 +190,7 @@ def displayMultipleFunctionData(functions: list[list[str]]):
     for row in functions:
         displayFunctionData(row)
 
-def getAllModules():
-    result = []
-    for row in funcsFile:
-        result.append(f"{row[0]} module")
-
-    return list(set(result))
+def getAllModules(): return list(set([f"{row[0]} module" for row in funcsFile]))
 
 def main():
     sendBotMessage(f"Hello! I'm {botName}, but you can call me {nickname}. I'm here to help you find the right Python functions for your project!")
@@ -181,7 +200,13 @@ def main():
 
     print("="*40)
     userInput = input("[YOU] ")
-    while (userInput.lower() != 'exit'):
+    while (userInput.lower() != exitKeyword):
+        if "add a new function" in userInput.lower():
+            addFunctionProcess()
+            print("="*40)
+            userInput = input("[YOU] ")
+            continue
+
         sendBotMessage("Would you like me to fetch multiple functions that match your query? [Y/N] (If you leave this blank, I will default to 'N'.)")
         selectMultipleInput = input("[YOU] ")
 
@@ -192,13 +217,7 @@ def main():
             selectMultiple = True
         elif (selectMultipleInput.lower() == 'n') or (selectMultipleInput.lower() == 'no') or (selectMultipleInput.lower() == ''):
             selectMultiple = False
-
-        print(f"selectMultiple: {selectMultiple}")
-
-        if "add a new function" in userInput.lower():
-            addFunctionProcess()
-            continue
-
+        
         moduleToSearch = None
         for module in getAllModules():
             if module in userInput.lower():
@@ -207,7 +226,7 @@ def main():
         i = InputHandler(userInput)
         foundFunction = makeComparisons(i, moduleToSearch, selectMultiple)
 
-        if foundFunction == None:
+        if (foundFunction == None) or (foundFunction == []):
             sendBotMessage("I'm sorry, but I couldn't find the function you were looking for. Please try again.")
             
         else:

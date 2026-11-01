@@ -1,25 +1,58 @@
-LibraryName,FunctionName,Description
-random,random.shuffle,"Shuffle a python list in place, and return None."
-random,random.choice,"Choose a random element from a non-empty sequence."
-numpy,numpy.array,"Creates and returns a 1-dimensional (1D) array of type `ndarray`."
-numpy,numpy.reshape,"Returns a reshaped array of type `ndarray` without changing data."
-numpy,numpy.ndarray,"Creates and returns an n-dimensional (nD) array of type `ndarray`. In other words, an array of any size."
-numpy,numpy.vstack,"Stack arrays in sequence vertically (row wise)."
-numpy,numpy.hstack,"Stack arrays in sequence horizontally (column wise)."
-math,math.isnan,"Return True if a given number is a NaN (not a number), and False otherwise."
-pandas,pandas.read_csv,"Read a CSV file into a DataFrame object."
-numpy,numpy.arange,"Creates and returns an array, of type `ndarray`, filled with values between given parameters `start` and `stop`."
-numpy,numpy.zeros,"Return a new array of given shape and type, filled with zeros."
-numpy,numpy.ones,"Return a new array of given shape and type, filled with ones."
-numpy,numpy.concatenate,"Joins, or concatenates, a sequence of arrays along the given axis."
-numpy,numpy.ndarray.mean,"Returns the average of the array elements along the given axis."
-numpy,numpy.ndarray.max,"Return the largest weight in the dataset"
-numpy,numpy.ndarray.argmax,"Return the index of the largest weight in the dataset"
-pandas,pandas.Series.describe,"Generate descriptive, describes the, statistics about the given Series object. Descriptive statistics include those that summarize the central tendency, dispersion and shape of a dataset’s distribution, excluding NaN values."
-numpy,numpy.concat,"Joins, or concatenates, a sequence of arrays along the given axis."
-pandas,pandas.DataFrame.set_index,"Set the DataFrame index (row labels) using one or more existing columns or arrays (of the correct length). The index can replace the existing index or expand on it."
-scipy,scipy.stats.shapiro,"Perform the Shapiro-Wilk test for normality."
-scipy,scipy.stats.wilcoxen,"Calculate the Wilcoxon signed-rank test."
-scipy,scipy.stats.ttest_1samp,"Calculate the T-test for the mean of ONE group of scores."
-scipy,scipy.stats.ttest_rel,"Calculate the t-test on TWO RELATED samples of scores."
-scipy,scipy.stats.mannwhitneyu,"Perform the Mann-Whitney U rank test on two independent samples."
+LibraryName,FunctionName,Description,Parameters
+
+numpy,numpy.concat,"Joins, or concatenates, a sequence of arrays along the given axis.","(arrays, /, axis=0, out=None, *, dtype=None, casting='same_kind')"
+
+scipy,scipy.stats.shapiro,Perform the Shapiro-Wilk test for normality.,"(x, *, axis=None, nan_policy='propagate', keepdims=False)"
+
+random,random.shuffle,"Shuffle a python list in place, and returns None.",(x)
+
+random,random.choice,Choose a random element from a non-empty sequence.,(seq)
+
+numpy,numpy.array,Creates and returns a 1-dimensional (1D) array of type `ndarray`.,"(object, dtype=None, *, copy=True, order='K', subok=False, ndmin=0, ndmax=0, like=None)"
+
+numpy,numpy.reshape,Returns a reshaped array of type `ndarray` without changing data.,"(a, /, shape, order='C', *, copy=None)"
+
+numpy,numpy.ndarray,"Creates and returns an n-dimensional (nD) array of type `ndarray`. In other words, an array of any size.","(shape, dtype=None, buffer=None, offset=0, strides=None, order=None)"
+
+numpy,numpy.vstack,Stack arrays in sequence vertically (row wise).,"(tup, *, dtype=None, casting='same_kind')"
+
+numpy,numpy.hstack,Stack arrays in sequence horizontally (column wise).,"(tup, *, dtype=None, casting='same_kind')"
+
+math,math.isnan,"Return True if a given number is a NaN (not a number), and False otherwise.","(x, /)"
+
+pandas,pandas.read_csv,Read a CSV file into a DataFrame object.,"(filepath_or_buffer: 'FilePath | ReadCsvBuffer[bytes] | ReadCsvBuffer[str]', *, sep: 'str | None | lib.NoDefault' = <no_default>, delimiter: 'str | None | lib.NoDefault' = None, header: ""int | Sequence[int] | None | Literal['infer']"" = 'infer', names: 'Sequence[Hashable] | None | lib.NoDefault' = <no_default>, index_col: 'IndexLabel | Literal[False] | None' = None, usecols: 'UsecolsArgType' = None, dtype: 'DtypeArg | None' = None, engine: 'CSVEngine | None' = None, converters: 'Mapping[HashableT, Callable] | None' = None, true_values: 'list | None' = None, false_values: 'list | None' = None, skipinitialspace: 'bool' = False, skiprows: 'list[int] | int | Callable[[Hashable], bool] | None' = None, skipfooter: 'int' = 0, nrows: 'int | None' = None, na_values: 'Hashable | Iterable[Hashable] | Mapping[Hashable, Iterable[Hashable]] | None' = None, keep_default_na: 'bool' = True, na_filter: 'bool' = True, skip_blank_lines: 'bool' = True, parse_dates: 'bool | Sequence[Hashable] | None' = None, date_format: 'str | dict[Hashable, str] | None' = None, dayfirst: 'bool' = False, cache_dates: 'bool' = True, iterator: 'bool' = False, chunksize: 'int | None' = None, compression: 'CompressionOptions' = 'infer', thousands: 'str | None' = None, decimal: 'str' = '.', lineterminator: 'str | None' = None, quotechar: 'str' = '""', quoting: 'int' = 0, doublequote: 'bool' = True, escapechar: 'str | None' = None, comment: 'str | None' = None, encoding: 'str | None' = None, encoding_errors: 'str | None' = 'strict', dialect: 'str | csv.Dialect | None' = None, on_bad_lines: 'str' = 'error', low_memory: 'bool' = True, memory_map: 'bool' = False, float_precision: ""Literal['high', 'legacy', 'round_trip'] | None"" = None, storage_options: 'StorageOptions | None' = None, dtype_backend: 'DtypeBackend | lib.NoDefault' = <no_default>) -> 'DataFrame | TextFileReader'"
+
+numpy,numpy.arange,"Creates and returns an array, of type `ndarray`, filled with values between given parameters `start` and `stop`.","(start_or_stop, /, stop=None, step=1, *, dtype=None, device=None, like=None)"
+
+numpy,numpy.zeros,"Return a new array of given shape and type, filled with zeros.","(shape, dtype=None, order='C', *, device=None, like=None)"
+
+numpy,numpy.ones,"Return a new array of given shape and type, filled with ones.","(shape, dtype=None, order='C', *, device=None, like=None)"
+
+numpy,numpy.concatenate,"Joins, or concatenates, a sequence of arrays along the given axis.","(arrays, /, axis=0, out=None, *, dtype=None, casting='same_kind')"
+
+numpy,numpy.ndarray.mean,Returns the average of the array elements along the given axis.,"(self, /, axis=None, dtype=None, out=None, **kwargs)"
+
+numpy,numpy.ndarray.max,Return the largest weight in the dataset,"(self, /, axis=None, out=None, **kwargs)"
+
+numpy,numpy.ndarray.argmax,Return the index of the largest weight in the dataset,"(self, /, axis=None, out=None, *, keepdims=False)"
+
+pandas,pandas.Series.describe,"Generate descriptive, describes the, statistics about the given Series object. Descriptive statistics include those that summarize the central tendency, dispersion and shape of a dataset�s distribution, excluding NaN values.","(self, percentiles=None, include=None, exclude=None) -> 'Self'"
+
+pandas,pandas.DataFrame.set_index,Set the DataFrame index (row labels) using one or more existing columns or arrays (of the correct length). The index can replace the existing index or expand on it.,"(self, keys, *, drop: 'bool' = True, append: 'bool' = False, inplace: 'bool' = False, verify_integrity: 'bool | lib.NoDefault' = <no_default>) -> 'DataFrame | None'"
+
+scipy,scipy.stats.wilcoxon,Calculate the Wilcoxon signed-rank test.,"(x, y=None, zero_method='wilcox', correction=False, alternative='two-sided', method='auto', *, axis=0, nan_policy='propagate', keepdims=False)"
+
+scipy,scipy.stats.ttest_1samp,Calculate the T-test for the mean of ONE group of scores.,"(a, popmean, axis=0, nan_policy='propagate', alternative='two-sided', *, keepdims=False)"
+
+scipy,scipy.stats.ttest_rel,Calculate the t-test on two related samples of scores.,"(a, b, axis=0, nan_policy='propagate', alternative='two-sided', *, keepdims=False)"
+
+scipy,scipy.stats.mannwhitneyu,Perform the Mann-Whitney U rank test on two independent samples.,"(x, y, use_continuity=True, alternative='two-sided', axis=0, method='auto', *, nan_policy='propagate', keepdims=False)"
+
+scipy,scipy.stats.pearsonr,Pearson correlation coefficient and p-value for testing non-correlation.,"(x, y, *, alternative='two-sided', method=None, axis=0)"
+
+scipy,scipy.stats.f_oneway,Perform one-way ANOVA. This will test the null hypothesis that two or more groups have the same population mean.,"(*samples, axis=0, equal_var=True, nan_policy='propagate', keepdims=False)"
+
+scipy,scipy.stats.linregress,"Calculate a linear least-squares regression, or a linear regression model, for two sets of measurements.","(x, y, alternative='two-sided', *, axis=0, nan_policy='propagate', keepdims=False)"
+
+pandas,pandas.DataFrame.head,"Returns the first n rows of a dataframe object, where n is an integer","(self, n: 'int' = 5) -> 'Self'"
+
